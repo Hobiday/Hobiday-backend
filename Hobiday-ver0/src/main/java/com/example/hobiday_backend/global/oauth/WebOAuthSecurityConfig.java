@@ -29,16 +29,16 @@ public class WebOAuthSecurityConfig {
     private final RefreshTokenRepository refreshTokenRepository;
     private final UserService userService;
 
-//    @Bean
-//    public WebSecurityCustomizer configure(){ // 스프링 시큐리티 기능 비활성화(백에드에서 리소스 사용할때만 코드 필요)
-//        return (web) -> web.ignoring()
-////                .requestMatchers(toH2Console())
-//                .requestMatchers(
-//                        new AntPathRequestMatcher("/img/**"),
-//                        new AntPathRequestMatcher("/css/**"),
-//                        new AntPathRequestMatcher("/js/**")
-//                );
-//    }
+    @Bean
+    public WebSecurityCustomizer configure(){ // 스프링 시큐리티 기능 비활성화(백에드에서 리소스 사용할때만 코드 필요)
+        return (web) -> web.ignoring()
+//                .requestMatchers(toH2Console())
+                .requestMatchers(
+                        new AntPathRequestMatcher("/img/**"),
+                        new AntPathRequestMatcher("/css/**"),
+                        new AntPathRequestMatcher("/js/**")
+                );
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{

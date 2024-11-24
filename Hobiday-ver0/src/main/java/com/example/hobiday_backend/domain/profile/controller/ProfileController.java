@@ -70,16 +70,16 @@ public class ProfileController {
     }
 
     // ============================= 백엔드 테스트용: 로그인->프로필 등록 =============================
-//    @PostMapping("/api/profile")
-//    public ResponseEntity<?> addProfile(@RequestBody AddProfileRequest addProfileRequest,
-//                                        Principal principal) {
-//        log.info("현재 로그인한 사용자명(principal): " + principal.getName()); // 둘 중 하나 선택
-//
-//        addProfileRequest.profileName = userRepository.findByEmail(principal.getName()).get().getNickname();
-//        User user = userRepository.findByEmail(principal.getName()).get();
-////        Profile profile = profileService.saveProfile(addProfileRequest, user);
-//        Profile profile = profileService.saveFirst(user, addProfileRequest);
-//        return ResponseEntity.status(HttpStatus.CREATED)
-//                .body(profile.getProfileName());
-//    }
+    @PostMapping("/api/profile")
+    public ResponseEntity<?> addProfile(@RequestBody AddProfileRequest addProfileRequest,
+                                        Principal principal) {
+        log.info("현재 로그인한 사용자명(principal): " + principal.getName()); // 둘 중 하나 선택
+
+        addProfileRequest.profileName = userRepository.findByEmail(principal.getName()).get().getNickname();
+        User user = userRepository.findByEmail(principal.getName()).get();
+//        Profile profile = profileService.saveProfile(addProfileRequest, user);
+        Profile profile = profileService.saveFirst(user, addProfileRequest);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(profile.getProfileName());
+    }
 }
